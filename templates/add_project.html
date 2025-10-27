@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Project - ProjectHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c63ff; /* A vibrant purple */
+            --secondary-color: #8D86FF; /* Lighter purple */
+            --background-light: #f4f7f6;
+            --text-dark: #333;
+            --text-muted: #666;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+        }
+
+        body {
+            background-color: var(--background-light);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column; /* Allow content to stack */
+            min-height: 100vh; /* Full viewport height */
+        }
+
+        /* Navbar Styling (copied from home page) */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand .icon {
+            margin-right: 8px;
+            font-size: 1.5em;
+        }
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        .btn-brand-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+        }
+        .btn-brand-primary:hover {
+            background-color: #5a54e5;
+            transform: translateY(-2px);
+            color: white;
+        }
+        .btn-outline-brand-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-outline-brand-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .page-header h1 {
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+        }
+        .page-header p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+        }
+
+        /* Form Container Styling */
+        .form-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            padding: 40px;
+            max-width: 700px; /* Wider than login/register for form content */
+            margin: 0 auto 80px auto; /* Center the card, add bottom margin */
+            width: 100%;
+            text-align: left; /* Align text within the card */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card h2 {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            text-align: center;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px; /* Space between label and input */
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(108, 99, 255, 0.25);
+        }
+
+        textarea.form-control {
+            min-height: 120px; /* Make textarea taller */
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            border: none;
+            width: auto; /* Allow button to size to content */
+            min-width: 180px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px; /* Space between buttons */
+        }
+        .btn-submit:hover {
+            background-color: #5a54e5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .btn-back {
+            background-color: #6c757d; /* Bootstrap secondary grey */
+            color: white;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            width: auto;
+            min-width: 180px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-back:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Footer (copied from home page) */
+        .footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.95rem;
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+        .footer p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-rocket icon"></i> ProjectHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                     <li class="nav-item ms-lg-3">
+                        <a href="/login" class="btn btn-outline-brand-primary me-2">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/register" class="btn btn-brand-primary">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Upload Your Masterpiece!</h1>
+            <p>Share your innovative project with the ProjectHub community.</p>
+        </div>
+    </section>
+
+    <!-- Add Project Form -->
+    <div class="container">
+        <div class="form-card">
+            <h2>Add New Project</h2>
+            <form action="/add" method="POST" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <label for="title" class="form-label"><i class="fas fa-heading me-2"></i>Project Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="e.g., AI-Powered Study Assistant" required>
+                </div>
+                <div class="mb-4">
+                    <label for="description" class="form-label"><i class="fas fa-align-left me-2"></i>Project Description</label>
+                    <textarea class="form-control" name="description" id="description" rows="5" placeholder="Provide a detailed description of your project, its features, and technologies used." required></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="category" class="form-label"><i class="fas fa-tags me-2"></i>Category</label>
+                    <input type="text" class="form-control" name="category" id="category" placeholder="e.g., Web Development, Machine Learning, Robotics" required>
+                </div>
+                <div class="mb-4">
+                    <label for="github_link" class="form-label"><i class="fab fa-github me-2"></i>GitHub Link (Optional)</label>
+                    <input type="url" class="form-control" name="github_link" id="github_link" placeholder="https://github.com/your-project">
+                </div>
+                 <div class="mb-4">
+                    <label for="demo_link" class="form-label"><i class="fas fa-link me-2"></i>Demo Link (Optional)</label>
+                    <input type="url" class="form-control" name="demo_link" id="demo_link" placeholder="https://your-project-demo.com">
+                </div>
+                <div class="mb-5">
+                    <label for="file" class="form-label"><i class="fas fa-upload me-2"></i>Upload Project File (e.g., PDF report, Zip archive)</label>
+                    <input type="file" class="form-control" name="file" id="file">
+                    <div class="form-text mt-2">Max file size: 10MB. Accepted formats: .zip, .pdf, .docx.</div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-submit"><i class="fas fa-paper-plane me-2"></i>Add Project</button>
+                    <a href="/projects" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Projects</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-2">© 2025 ProjectHub | All rights reserved.</p>
+            <p>Designed and Developed with <i class="fas fa-heart text-danger"></i> using Flask & Bootstrap</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

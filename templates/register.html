@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - ProjectHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c63ff; /* A vibrant purple */
+            --secondary-color: #8D86FF; /* Lighter purple */
+            --background-light: #f4f7f6;
+            --text-dark: #333;
+            --text-muted: #666;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+        }
+
+        body {
+            background-color: var(--background-light);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Make body at least viewport height */
+            margin: 0;
+            padding: 20px; /* Add padding for smaller screens */
+        }
+
+        .register-container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-container::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px; /* Changed position for variety */
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        .register-container::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px; /* Changed position for variety */
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .register-header {
+            margin-bottom: 30px;
+        }
+
+        .register-header h2 {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+
+        .register-header .lead {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(108, 99, 255, 0.25);
+        }
+
+        .btn-brand-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%; /* Full width button */
+            margin-top: 15px;
+            border: none;
+        }
+
+        .btn-brand-primary:hover {
+            background-color: #5a54e5; /* Slightly darker purple */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white; /* Ensure text remains white */
+        }
+
+        .alert {
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+        }
+
+        .login-link {
+            margin-top: 25px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #5a54e5;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <h2>Join ProjectHub Today!</h2>
+            <p class="lead">Create your account to start sharing and exploring amazing projects.</p>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-warning">{{ messages[0] }}</div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <input type="text" name="username" placeholder="Choose a Username" class="form-control" required>
+            </div>
+            <div class="mb-4">
+                <input type="password" name="password" placeholder="Create a Password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-brand-primary">Register Account</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="/login">Login here</a></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

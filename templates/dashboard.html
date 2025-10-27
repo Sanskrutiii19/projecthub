@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ProjectHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #8D86FF;
+            --background-light: #f4f7f6;
+            --text-dark: #333;
+            --text-muted: #666;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+        }
+        body {
+            background-color: var(--background-light);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand .icon {
+            margin-right: 8px;
+            font-size: 1.5em;
+        }
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        .btn-brand-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+        }
+        .btn-brand-primary:hover {
+            background-color: #5a54e5;
+            transform: translateY(-2px);
+            color: white;
+        }
+        .btn-danger-custom {
+            background-color: #dc3545;
+            color: white;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+        }
+        .btn-danger-custom:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+        .dashboard-header {
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .dashboard-header h1 {
+            font-weight: 700;
+            font-size: 3rem;
+        }
+        .projects-dashboard-grid {
+            padding-bottom: 80px;
+        }
+        .project-card {
+            background-color: var(--card-bg);
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            padding: 25px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px var(--shadow-hover);
+        }
+        .project-card .card-title {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .card-actions {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.95rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-rocket icon"></i> ProjectHub
+            </a>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/projects">View All Projects</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="/add" class="btn btn-brand-primary me-2"><i class="fas fa-plus-circle me-2"></i>Add Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="btn btn-danger-custom"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <h1>Welcome, {{ current_user.username | default('User') }}!</h1>
+            <p>Manage your uploaded projects and contribute to the community.</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section class="projects-dashboard-grid">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5" style="color: var(--primary-color);">Your Projects</h2>
+
+            {% if projects %}
+                <div class="row g-4">
+                    {% for project in projects %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card">
+                            <div>
+                                <h5 class="card-title">{{ project.title }}</h5>
+                                <p class="card-category"><i class="fas fa-tag me-2"></i>{{ project.category }}</p>
+                                <p class="card-text">{{ project.description }}</p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="{{ url_for('edit_project', id=project.id) }}" class="btn btn-outline-info">
+                                    <i class="fas fa-edit me-2"></i>Edit
+                                </a>
+                                <a href="{{ url_for('delete_project', id=project.id) }}" class="btn btn-outline-danger">
+                                    <i class="fas fa-trash-alt me-2"></i>Delete
+                                </a>
+                                {% if project.filename %}
+                                <a href="{{ url_for('static', filename='uploads/' + project.filename) }}" class="btn btn-brand-primary" download>
+                                    <i class="fas fa-download me-2"></i>Download
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-dashboard text-center">
+                    <h3><i class="fas fa-folder-open me-2"></i>No projects found!</h3>
+                    <p>You haven’t added any projects yet. Let’s get started!</p>
+                    <a href="/add" class="btn btn-brand-primary"><i class="fas fa-plus-circle me-2"></i>Add Your First Project</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-2">© 2025 ProjectHub | All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart text-danger"></i> using Flask & Bootstrap</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

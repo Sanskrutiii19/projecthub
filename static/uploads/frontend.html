@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioPro - Build Your Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #10B981 100%);
+        }
+        
+        .portfolio-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4338CA;
+            transform: translateY(-2px);
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .drag-area {
+            border: 2px dashed #D1D5DB;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .drag-area.active {
+            border-color: var(--primary);
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-address-card text-indigo-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">PortfolioPro</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Dashboard
+                        </a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Templates
+                        </a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Examples
+                        </a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Pricing
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="btn-primary px-4 py-2 rounded-md text-sm font-medium">
+                        Create Portfolio
+                    </button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Build Your Professional Portfolio in Minutes</h1>
+                    <p class="text-xl mb-8 text-indigo-100">Showcase your work and skills with our easy-to-use portfolio builder. Perfect for designers, developers, photographers, and creatives.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="btn-primary px-6 py-3 rounded-md text-lg font-medium">
+                            Get Started - It's Free
+                        </button>
+                        <button class="bg-white text-indigo-600 px-6 py-3 rounded-md text-lg font-medium">
+                            View Templates
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2862c931-d506-4296-8b85-b9e51e4c7a75.png" alt="Modern portfolio preview showing a clean layout with projects, skills section and professional about section" class="rounded-lg shadow-xl w-full max-w-md">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything You Need For Your Portfolio</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Designed to help you showcase your work in the best possible way</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="portfolio-card bg-white rounded-lg p-6 shadow">
+                    <div class="bg-indigo-50 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                        <i class="fas fa-palette text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Beautiful Templates</h3>
+                    <p class="text-gray-600">Choose from dozens of professionally designed templates that you can customize to match your style.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="portfolio-card bg-white rounded-lg p-6 shadow">
+                    <div class="bg-green-50 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                        <i class="fas fa-magic text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Drag & Drop Editor</h3>
+                    <p class="text-gray-600">Easily build your portfolio with our intuitive drag and drop interface. No coding required.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="portfolio-card bg-white rounded-lg p-6 shadow">
+                    <div class="bg-yellow-50 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-yellow-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Analytics Dashboard</h3>
+                    <p class="text-gray-600">See who's viewing your portfolio and which projects get the most attention.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Builder Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Build Your Portfolio in 3 Easy Steps</h2>
+                    
+                    <!-- Step 1 -->
+                    <div class="flex items-start mb-8">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Choose Your Template</h3>
+                            <p class="text-gray-600">Select from our collection of beautiful, responsive templates designed for every profession.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="flex items-start mb-8">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Add Your Content</h3>
+                            <p class="text-gray-600">Upload your projects, add descriptions, and customize sections to showcase your skills.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="flex items-start">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">3</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Publish & Share</h3>
+                            <p class="text-gray-600">Publish your portfolio with one click and share it with potential clients and employers.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-4 bg-gray-100 border-b flex items-center justify-between">
+                            <div class="flex space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="text-sm text-gray-500">http://yourportfolio.com</div>
+                            <div class="w-4"></div>
+                        </div>
+                        <div class="p-6">
+                            <div id="portfolio-preview" class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h3 class="text-xl font-bold">Your Name</h3>
+                                    <div class="flex space-x-2">
+                                        <button class="text-sm px-3 py-1 bg-gray-200 rounded">About</button>
+                                        <button class="text-sm px-3 py-1 bg-gray-200 rounded">Projects</button>
+                                        <button class="text-sm px-3 py-1 bg-gray-200 rounded">Contact</button>
+                                    </div>
+                                </div>
+                                <div class="drag-area p-8 text-center cursor-pointer mb-4" id="image-upload">
+                                    <div class="mb-2">
+                                        <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl"></i>
+                                    </div>
+                                    <p class="text-gray-500">Drag & drop your profile image here</p>
+                                    <p class="text-sm text-gray-400">or click to browse</p>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="Professional Designer">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                                    <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md h-24" placeholder="Write a short bio about yourself and your skills..."></textarea>
+                                </div>
+                                <button class="btn-primary w-full mt-4 py-2 rounded-md">
+                                    Add Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Gallery -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Popular Templates</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Browse our collection of professionally designed portfolio templates</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Template 1 -->
+                <div class="portfolio-card rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/de1903dc-e227-497f-823a-d1c9b45b51fc.png" alt="Minimal portfolio template with clean layout and focus on visual content" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-xl font-bold">Minimal</h3>
+                            <p class="text-sm">Clean & Simple</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-900 font-medium">Most Popular</span>
+                            <button class="btn-primary px-4 py-2 rounded-md text-sm">
+                                Use Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Template 2 -->
+                <div class="portfolio-card rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5b5e924a-159d-4ae1-ab8e-f9de3ff2e0a1.png" alt="Creative portfolio template with bold colors and unique layout" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-xl font-bold">Creative</h3>
+                            <p class="text-sm">Bold & Expressive</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-900 font-medium">For Artists</span>
+                            <button class="btn-primary px-4 py-2 rounded-md text-sm">
+                                Use Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Template 3 -->
+                <div class="portfolio-card rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a8ae6b9a-5898-40ed-a4f5-6c3017626977.png" alt="Professional portfolio template with structured layout ideal for resumes" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-xl font-bold">Professional</h3>
+                            <p class="text-sm">Structured & Formal</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-900 font-medium">For Job Seekers</span>
+                            <button class="btn-primary px-4 py-2 rounded-md text-sm">
+                                Use Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="btn-primary px-8 py-3 rounded-md font-bold">
+                    View All Templates (24+)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">What Our Users Say</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Join thousands of professionals who have built their portfolio with us</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="portfolio-card bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c6375686-8c16-48eb-bcc9-9238437a9c8e.png" alt="Sarah Johnson, UX Designer looking professional in her portfolio" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <p class="text-gray-600 text-sm">UX Designer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"PortfolioPro helped me land my dream job at a top tech company. The templates are gorgeous and super easy to customize."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="portfolio-card bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ec650928-56ba-4c6f-aa42-478193246196.png" alt="Michael Chen, Photographer smiling with his camera" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <h4 class="font-bold">Michael Chen</h4>
+                            <p class="text-gray-600 text-sm">Photographer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"I've gotten so many more client inquiries since switching to PortfolioPro. The image galleries showcase my work beautifully."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="portfolio-card bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e693a0c2-7a4e-405a-9a59-0f7b57a3e5c0.png" alt="David Rodriguez, Web Developer working at his desk" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <div>
+                            <h4 class="font-bold">David Rodriguez</h4>
+                            <p class="text-gray-600 text-sm">Web Developer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Even as a developer, I appreciate how easy PortfolioPro makes it to showcase my projects without spending hours on design."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Build Your Perfect Portfolio?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of professionals who showcase their work with PortfolioPro. No credit card required.</p>
+            <button class="btn-primary px-8 py-4 rounded-md text-lg font-bold mx-auto animate-pulse">
+                Get Started For Free
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-address-card text-indigo-400 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-white">PortfolioPro</span>
+                    </div>
+                    <p class="mb-4">The easiest way to create a professional portfolio that gets you noticed.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Features</a></li>
+                        <li><a href="#" class="hover:text-white">Templates</a></li>
+                        <li><a href="#" class="hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white">Examples</a></li>
+                        <li><a href="#" class="hover:text-white">Updates</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="hover:text-white">Webinars</a></li>
+                        <li><a href="#" class="hover:text-white">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                        <li><a href="#" class="hover:text-white">Press</a></li>
+                        <li><a href="#" class="hover:text-white">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="mb-4 md:mb-0">© 2023 PortfolioPro. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                    <a href="#" class="hover:text-white">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Drag and drop functionality for portfolio builder
+        const dragArea = document.getElementById('image-upload');
+        const inputFile = document.createElement('input');
+        inputFile.type = 'file';
+        inputFile.style.display = 'none';
+        document.body.appendChild(inputFile);
+        
+        dragArea.addEventListener('click', () => {
+            inputFile.click();
+        });
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dragArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dragArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dragArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dragArea.classList.add('active');
+        }
+        
+        function unhighlight() {
+            dragArea.classList.remove('active');
+        }
+        
+        inputFile.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    dragArea.innerHTML = `<img src="${e.target.result}" class="w-full h-32 object-cover rounded-md">`;
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
+</body>
+</html>
