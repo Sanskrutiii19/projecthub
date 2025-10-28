@@ -1,5 +1,0 @@
-flask
-gunicorn
-werkzeug
-itsdangerous
-jinja2
