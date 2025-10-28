@@ -1,3 +1,5 @@
-Flask
+flask
 gunicorn
-requests
+werkzeug
+itsdangerous
+jinja2
